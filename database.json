@@ -1,0 +1,6 @@
+{
+  "tasks": [
+    { "id": 1, "title": "Написать курсовую работу", "completed": false, "priority": "high" },
+    { "id": 2, "title": "Сделать коммит в Git", "completed": true, "priority": "medium" }
+  ]
+}
