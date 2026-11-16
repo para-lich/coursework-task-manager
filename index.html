@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow — Менеджер проектов</title>
+    <title>TaskFlow — Менеджер задач</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -16,55 +16,74 @@
                 TaskFlow
             </div>
             <nav class="menu">
-                <a href="#" class="menu-item active">📋 Все задачи</a>
-                <a href="#" class="menu-item">📅 Сегодня</a>
-                <a href="#" class="menu-item">⚙️ Настройки</a>
+                <!-- Оставили только рабочие вкладки -->
+                <a href="#" class="menu-item active" onclick="switchTab('tasks', event)">📋 Мои задачи</a>
+                <a href="#" class="menu-item" onclick="switchTab('settings', event)">⚙️ Настройки</a>
             </nav>
-            <div class="user-profile">
-                <div class="avatar">М</div>
-                <div>
-                    <div class="user-name">Мендилуц Е.</div>
-                    <div class="user-role">Студент</div>
-                </div>
-            </div>
         </aside>
 
         <!-- Основная рабочая область -->
         <main class="main-content">
-            <header class="top-header">
-                <h1>Мои задачи</h1>
-                <div class="header-actions">
-                    <button class="icon-btn">🔔</button>
-                </div>
-            </header>
+            
+            <!-- Вкладка: Задачи -->
+            <div id="tab-tasks">
+                <header class="top-header">
+                    <h1>Мои задачи</h1>
+                </header>
 
-            <!-- Панель добавления задачи -->
-            <section class="task-creator">
-                <input type="text" id="taskInput" placeholder="Что нужно сделать?">
-                <select id="priorityInput">
-                    <option value="low">🟢 Низкий</option>
-                    <option value="medium" selected>🟡 Средний</option>
-                    <option value="high">🔴 Высокий</option>
-                </select>
-                <button onclick="addTask()" class="primary-btn">Создать задачу</button>
-            </section>
+                <section class="task-creator">
+                    <input type="text" id="taskInput" placeholder="Что нужно сделать?">
+                    <select id="priorityInput">
+                        <option value="low">🟢 Низкий</option>
+                        <option value="medium" selected>🟡 Средний</option>
+                        <option value="high">🔴 Высокий</option>
+                    </select>
+                    <button onclick="addTask()" class="primary-btn">Создать задачу</button>
+                </section>
 
-            <!-- Статистика и фильтры -->
-            <section class="board-header">
-                <div class="filters">
-                    <button class="filter-btn active" onclick="setFilter('all', event)">Все</button>
-                    <button class="filter-btn" onclick="setFilter('active', event)">Активные</button>
-                    <button class="filter-btn" onclick="setFilter('completed', event)">Выполненные</button>
-                </div>
-                <div class="stats">
-                    <span id="task-counter">0 задач</span>
-                </div>
-            </section>
+                <section class="board-header">
+                    <div class="filters">
+                        <button class="filter-btn active" onclick="setFilter('all', event)">Все</button>
+                        <button class="filter-btn" onclick="setFilter('active', event)">Активные</button>
+                        <button class="filter-btn" onclick="setFilter('completed', event)">Выполненные</button>
+                    </div>
+                    <div class="stats">
+                        <span id="task-counter">0 задач</span>
+                    </div>
+                </section>
 
-            <!-- Список задач -->
-            <section class="task-board">
-                <ul id="taskList"></ul>
-            </section>
+                <section class="task-board">
+                    <ul id="taskList"></ul>
+                </section>
+            </div>
+
+            <!-- Вкладка: Настройки (Рабочие) -->
+            <div id="tab-settings" class="hidden">
+                <header class="top-header">
+                    <h1>Настройки</h1>
+                </header>
+                <div class="settings-card">
+                    <div class="setting-item">
+                        <div>
+                            <h3>Сортировка задач</h3>
+                            <p>По умолчанию задачи выводятся в порядке добавления.</p>
+                        </div>
+                        <select id="sortSelect" onchange="sortTasks()">
+                            <option value="default">По умолчанию</option>
+                            <option value="high">Сначала важные</option>
+                            <option value="low">Сначала менее важные</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <h3>Очистить все данные</h3>
+                            <p>Удалить все задачи из локального хранилища браузера.</p>
+                        </div>
+                        <button class="danger-btn" onclick="clearAllTasks()">Очистить</button>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
     <script src="script.js"></script>
