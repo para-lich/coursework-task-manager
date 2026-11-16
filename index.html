@@ -3,23 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Менеджер задач</title>
+    <title>TaskFlow — Менеджер проектов</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Менеджер задач</h1>
-        <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Новая задача...">
-            <select id="priorityInput">
-                <option value="low">Низкий</option>
-                <option value="medium">Средний</option>
-                <option value="high">Высокий</option>
-            </select>
-            <button onclick="addTask()">Добавить</button>
-        </div>
-        <ul id="taskList"></ul>
-        <p id="emptyMessage" style="display:none; text-align:center;">Список задач пуст</p>
+    <div class="app-layout">
+        <!-- Боковое меню (Сайдбар) -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                TaskFlow
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-item active">📋 Все задачи</a>
+                <a href="#" class="menu-item">📅 Сегодня</a>
+                <a href="#" class="menu-item">⚙️ Настройки</a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">М</div>
+                <div>
+                    <div class="user-name">Мендилуц Е.</div>
+                    <div class="user-role">Студент</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Основная рабочая область -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Мои задачи</h1>
+                <div class="header-actions">
+                    <button class="icon-btn">🔔</button>
+                </div>
+            </header>
+
+            <!-- Панель добавления задачи -->
+            <section class="task-creator">
+                <input type="text" id="taskInput" placeholder="Что нужно сделать?">
+                <select id="priorityInput">
+                    <option value="low">🟢 Низкий</option>
+                    <option value="medium" selected>🟡 Средний</option>
+                    <option value="high">🔴 Высокий</option>
+                </select>
+                <button onclick="addTask()" class="primary-btn">Создать задачу</button>
+            </section>
+
+            <!-- Статистика и фильтры -->
+            <section class="board-header">
+                <div class="filters">
+                    <button class="filter-btn active" onclick="setFilter('all', event)">Все</button>
+                    <button class="filter-btn" onclick="setFilter('active', event)">Активные</button>
+                    <button class="filter-btn" onclick="setFilter('completed', event)">Выполненные</button>
+                </div>
+                <div class="stats">
+                    <span id="task-counter">0 задач</span>
+                </div>
+            </section>
+
+            <!-- Список задач -->
+            <section class="task-board">
+                <ul id="taskList"></ul>
+            </section>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
