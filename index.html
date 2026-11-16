@@ -9,81 +9,38 @@
 </head>
 <body>
     <div class="app-layout">
-        <!-- Боковое меню (Сайдбар) -->
+        <!-- Боковое меню -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon"></div>
                 TaskFlow
             </div>
             <nav class="menu">
-                <!-- Оставили только рабочие вкладки -->
-                <a href="#" class="menu-item active" onclick="switchTab('tasks', event)">📋 Мои задачи</a>
-                <a href="#" class="menu-item" onclick="switchTab('settings', event)">⚙️ Настройки</a>
+                <a href="#" class="menu-item active">📋 Все задачи</a>
             </nav>
         </aside>
 
-        <!-- Основная рабочая область -->
+        <!-- Шапка и рабочая область -->
         <main class="main-content">
-            
-            <!-- Вкладка: Задачи -->
-            <div id="tab-tasks">
-                <header class="top-header">
-                    <h1>Мои задачи</h1>
-                </header>
+            <header class="top-header">
+                <h1>Менеджер задач</h1>
+            </header>
 
-                <section class="task-creator">
-                    <input type="text" id="taskInput" placeholder="Что нужно сделать?">
-                    <select id="priorityInput">
-                        <option value="low">🟢 Низкий</option>
-                        <option value="medium" selected>🟡 Средний</option>
-                        <option value="high">🔴 Высокий</option>
-                    </select>
-                    <button onclick="addTask()" class="primary-btn">Создать задачу</button>
-                </section>
+            <!-- Форма добавления -->
+            <section class="task-creator">
+                <input type="text" id="taskInput" placeholder="Новая задача...">
+                <select id="priorityInput">
+                    <option value="low">Низкий</option>
+                    <option value="medium" selected>Средний</option>
+                    <option value="high">Высокий</option>
+                </select>
+                <button onclick="addTask()" class="primary-btn">Добавить</button>
+            </section>
 
-                <section class="board-header">
-                    <div class="filters">
-                        <button class="filter-btn active" onclick="setFilter('all', event)">Все</button>
-                        <button class="filter-btn" onclick="setFilter('active', event)">Активные</button>
-                        <button class="filter-btn" onclick="setFilter('completed', event)">Выполненные</button>
-                    </div>
-                    <div class="stats">
-                        <span id="task-counter">0 задач</span>
-                    </div>
-                </section>
-
-                <section class="task-board">
-                    <ul id="taskList"></ul>
-                </section>
-            </div>
-
-            <!-- Вкладка: Настройки (Рабочие) -->
-            <div id="tab-settings" class="hidden">
-                <header class="top-header">
-                    <h1>Настройки</h1>
-                </header>
-                <div class="settings-card">
-                    <div class="setting-item">
-                        <div>
-                            <h3>Сортировка задач</h3>
-                            <p>По умолчанию задачи выводятся в порядке добавления.</p>
-                        </div>
-                        <select id="sortSelect" onchange="sortTasks()">
-                            <option value="default">По умолчанию</option>
-                            <option value="high">Сначала важные</option>
-                            <option value="low">Сначала менее важные</option>
-                        </select>
-                    </div>
-                    <div class="setting-item">
-                        <div>
-                            <h3>Очистить все данные</h3>
-                            <p>Удалить все задачи из локального хранилища браузера.</p>
-                        </div>
-                        <button class="danger-btn" onclick="clearAllTasks()">Очистить</button>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Список задач -->
+            <section class="task-board">
+                <ul id="taskList"></ul>
+            </section>
         </main>
     </div>
     <script src="script.js"></script>
