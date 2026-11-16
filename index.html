@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер задач</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Менеджер задач</h1>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Новая задача...">
+            <select id="priorityInput">
+                <option value="low">Низкий</option>
+                <option value="medium">Средний</option>
+                <option value="high">Высокий</option>
+            </select>
+            <button onclick="addTask()">Добавить</button>
+        </div>
+        <ul id="taskList"></ul>
+        <p id="emptyMessage" style="display:none; text-align:center;">Список задач пуст</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
