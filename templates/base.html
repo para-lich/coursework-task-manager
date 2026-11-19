@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TaskFlow{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        {% if session.user_id %}
+        <aside class="sidebar">
+            <div class="logo"><div class="logo-icon"></div>TaskFlow</div>
+            <nav class="menu">
+                <a href="{{ url_for('index') }}" class="menu-item {% if request.endpoint == 'index' %}active{% endif %}">📋 Все задачи</a>
+            </nav>
+            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="color: #a0a0b0; font-size: 14px; margin-bottom: 10px;">👤 {{ session.username }}</div>
+                <a href="{{ url_for('logout') }}" class="menu-item" style="color: #ef4444;">🚪 Выйти</a>
+            </div>
+        </aside>
+        {% endif %}
+        <main class="main-content">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}</div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+            <footer class="footer"><p>© 2026 TaskFlow. Курсовая работа. ИС с Git-flow в командной разработке.</p></footer>
+        </main>
+    </div>
+</body>
+</html>
