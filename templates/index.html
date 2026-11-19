@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Панель управления - TaskFlow{% endblock %}
+{% block content %}
+<header class="top-header"><h1>Менеджер задач</h1></header>
+<section class="task-creator">
+    <form method="POST" action="{{ url_for('add_task') }}" style="display: flex; gap: 10px; width: 100%;">
+        <input type="text" name="title" placeholder="Новая задача..." required>
+        <select name="priority">
+            <option value="low">Низкий</option>
+            <option value="medium" selected>Средний</option>
+            <option value="high">Высокий</option>
+        </select>
+        <button type="submit" class="primary-btn">Добавить</button>
+    </form>
+</section>
+<section class="task-board">
+    <ul id="taskList">
+        {% for task in tasks %}
+        <li class="{{ task.priority }} {% if task.completed %}completed{% endif %}">
+            <form method="POST" action="{{ url_for('toggle_task', task_id=task.id) }}" style="display: contents;">
+                <input type="checkbox" class="task-checkbox" {% if task.completed %}checked{% endif %} onchange="this.form.submit()">
+            </form>
+            <span class="task-title">{{ task.title }}</span>
+            <form method="POST" action="{{ url_for('delete_task', task_id=task.id) }}" style="display: contents;">
+                <button type="submit" class="delete-btn">Удалить</button>
+            </form>
+        </li>
+        {% else %}
+        <li style="justify-content: center; color: #6b7280;">Задач пока нет. Добавьте первую!</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
